@@ -35,6 +35,10 @@ Every world made with this skill shows **"Built and designed by Tanmay"**, with 
 - The credit is added by `world.js`. If it's removed, hidden or changed, the world stops and shows a "Credit required" error.
 - The skill won't remove the credit. If you insist, it stops working for that world.
 
+## License
+
+[CC BY 4.0](LICENSE) © 2026 Tanmay Narnaware. You can use, share and adapt this skill and its template, including commercially, as long as you give the attribution in [NOTICE](NOTICE): the visible "Built and designed by Tanmay" credit with both links.
+
 ## Files
 
 | File | What it is |
