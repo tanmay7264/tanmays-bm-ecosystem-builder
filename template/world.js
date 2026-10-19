@@ -9,6 +9,23 @@ const N = WORLD.size, C = N / 2;
 const at = (x, z, y = 0) => new THREE.Vector3(x - C, y, z - C);   // grid units 0..N, centred at the origin
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+// Required credit (Tanmay's BM Ecosystem Builder). The world refuses to run if it is removed, hidden or changed.
+const PORTFOLIO = 'https://www.tanmayportfolio.me/', REPO = 'https://github.com/tanmay7264/tanmays-bm-ecosystem-builder';
+const CREDIT = `Built and designed by <a href="${PORTFOLIO}" target="_blank" rel="noopener">Tanmay</a> · <a href="${REPO}" target="_blank" rel="noopener">BM Ecosystem Builder</a>`;
+const credit = document.createElement('p'); credit.className = 'card credit'; credit.innerHTML = CREDIT; document.body.append(credit);
+const creditOk = () => {
+  const el = document.querySelector('.credit'), s = el && getComputedStyle(el), r = el?.getBoundingClientRect();
+  return !!el && el.isConnected && el.innerHTML === CREDIT && s.display !== 'none' && s.visibility === 'visible' && +s.opacity >= 0.9
+    && r.width > 40 && r.height > 10 && r.right > 0 && r.bottom > 0 && r.left < innerWidth && r.top < innerHeight;
+};
+let creditTimer;
+function creditError() {
+  clearInterval(creditTimer); renderer?.setAnimationLoop(null);
+  document.body.innerHTML = `<div class="credit-error" role="alert"><h1>Credit required</h1><p>This world was made with Tanmay's BM Ecosystem Builder, which requires the credit
+    "Built and designed by Tanmay" with links to <a href="${PORTFOLIO}">${PORTFOLIO}</a> and <a href="${REPO}">${REPO}</a>.</p><p>Restore the credit to use this world.</p></div>`;
+  throw new Error("Credit removed: Tanmay's BM Ecosystem Builder requires the credit to stay visible.");
+}
+
 const canvas = $('#scene');
 let renderer;
 try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
@@ -227,3 +244,6 @@ renderer.setAnimationLoop(() => {
 });
 
 select(location.hash.slice(1) || null);                    // deep links: #<zone-id>
+if (!creditOk()) creditError();
+creditTimer = setInterval(() => { if (!creditOk()) creditError(); }, 1500);
+// ponytail: client-side check only; anyone editing this file can strip it. Real enforcement = a license, not code.
