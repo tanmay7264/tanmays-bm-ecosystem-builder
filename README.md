@@ -2,6 +2,8 @@
 
 A Claude Code skill that builds an interactive isometric 3D world (campus, office, factory, city block, event venue, process map…) as a zero-build Three.js page, in the style of the [GCL Campus](https://tanmay7264.github.io/gcl-campus/).
 
+**Live demo:** https://tanmay7264.github.io/tanmays-bm-ecosystem-builder/
+
 ## What it does
 
 1. **Interviews you:** what the world is, who it's for, its places (3–10), whether it has people or an animated walk-through, your brand colours, and reference images.
